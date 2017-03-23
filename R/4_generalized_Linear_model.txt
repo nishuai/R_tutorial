@@ -1,0 +1,24 @@
+glm(len~dose,data=ToothGrowth,family=gaussian(link = "identity"))
+
+require(MASS)
+data(menarche)
+str(menarche)
+summary(menarche)
+model.5<-glm(cbind(Menarche,Total-Menarche)~Age,family=binomial,data=menarche)
+summary(model.5)
+exp(coef(model.5)) #Gives Odds Ratios
+confint(model.5) #Gives confidence intervals
+
+data<-warpbreaks
+??(warpbreakes)
+str(warpbreaks)
+summary(warpbreakes)
+model.6<-glm(breaks ~ wool+tension, data = warpbreaks, family = poisson)
+summary(model.6)
+exp(coef(model.6)) #Gives Relative Risks
+
+plot(model.5)
+
+deviance(model.5) 
+AIC(model.5)
+BIC(model.5)

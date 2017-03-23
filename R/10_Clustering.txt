@@ -1,0 +1,9 @@
+km1 = kmeans(Pima.tr[,c(2,5)], 2, nstart=100)
+plot(Pima.tr[,c(2,5)], col =(km1$cluster +1), pch=16, cex=1)
+
+require(fastcluster)
+clust1<-hclust(dist(Pima.tr[,c(2,5)]))
+plot(clust1)
+abline(58,0,col=3,lwd=2,lty=6)
+abline(70,0,col=2,lwd=2,lty=5)
+abline(49,0,col=4,lwd=2,lty=4)

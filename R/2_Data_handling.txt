@@ -1,0 +1,17 @@
+par(mfrow=c(2,2))
+set.seed(7544)
+boxplot(c(sample(1:70,10),-50,130))
+title(main ="Sample Box-Plot")
+data<-ToothGrowth
+boxplot(ToothGrowth$len)
+title(main ="Box-Plot of Length")
+
+install.packages("outliers",repos='http://cran.us.r-project.org')
+require(outliers)
+set.seed(013412)
+outlier(rnorm(50))
+influence.measures(lm(mpg~.,data=mtcars)) # Multivariate and robust approach
+
+cor(data)
+car::vif(lm(mpg~.,data=mtcars))
+

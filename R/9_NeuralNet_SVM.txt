@@ -1,0 +1,15 @@
+require(nnet)
+set.seed(7544)
+nnet.1<-nnet(type~.,data=train,size=5)
+pred<-predict(nnet.1,test,type="class")
+table((noquote(pred)),test[,"type"])
+
+require(e1071)
+set.seed(7544)
+tune.svm(type~.,data=test,gamma=2^(-7:-2), cost = 2^(-1:1))
+
+set.seed(7544)
+svm.1<-svm(type~.,data=test,gamma = 2^-7, cost = 1)
+pred<-predict(svm.1,train,type="class")
+table((noquote(pred)),train[,"type"])
+table(test$type)

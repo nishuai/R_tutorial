@@ -1,0 +1,14 @@
+library(randomForest)
+smp_size <- floor(0.5 * nrow(Pima.tr))
+data<-Pima.tr
+smp_size <- floor(0.5 * nrow(data))
+set.seed(127)
+train_prop<-sample(seq_len(nrow(data)), size = smp_size)
+train<-data[train_prop, ]
+test<-data[-train_prop, ]
+rf.1<-randomForest(type~.,data=train,mtry=4,ntree=100,replace=TRUE)
+pred_rf.1<- predict(rf.1, newdata=test)
+
+par(mfrow=c(3,1))
+plot(rf.1,col=c(1,2,4))
+varImpPlot(rf.1,pch=13,col=seq(2:7))

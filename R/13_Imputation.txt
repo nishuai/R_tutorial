@@ -1,0 +1,22 @@
+data<-missForest::prodNA(Pima.tr[,-8], noNA = 0.1)#Create Missing data
+require(mice)
+system.time(imputed_mice<-mice(data,m=2,maxit=2,method ='pmm',seed=500))
+
+set.seed(7544)
+system.time(imputed_amelia<-Amelia::amelia(data,m=4))
+imputed_amelia$imputations
+
+set.seed(7544)
+require(missForest)
+system.time(imputed_forest<-missForest::missForest(data,maxiter=4,ntree=50))
+imputed_forest$ximp
+
+require(data.table)
+set.seed(7544)
+system.time(impute_hmisc<-Hmisc::aregImpute(~npreg+glu+bp+skin+bmi+ped+age,data,n.impute=4))
+head(impute_hmisc$imputed$npreg)
+
+set.seed(7544)
+system.time(imputed_mi<-mi::mi(data,n.iter=4))
+imputed<-mi::complete(imputed_mi)
+head(imputed)

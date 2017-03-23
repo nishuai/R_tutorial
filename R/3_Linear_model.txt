@@ -1,0 +1,28 @@
+t.test(ToothGrowth$dose)
+
+set.seed(011127)
+bartlett.test(rnorm(60,0,1)~dose,data=ToothGrowth)
+bartlett.test(rnorm(60,0,1)~scale(dose),data=ToothGrowth)
+
+par(mfrow=c(2,2))
+set.seed(405)
+qqplot(rnorm(10000,0,1),ToothGrowth$len,main="Normal Q-Q Plot")
+qqnorm(ToothGrowth$len)
+
+model.1<-lm(len~dose,data=ToothGrowth)
+model.1
+summary(model.1)
+model.2<-lm(len~.,data=ToothGrowth)
+summary(model.2)
+model.3<-lm(len~.-1,data=ToothGrowth)
+summary(model.3)
+model.4<-lm(len~dose+as.character(supp),data=ToothGrowth)
+summary(model.4)
+
+resid<-residuals(model.1) #Residuals produced by the model
+par(mfrow=c(2,2))
+pred<-predict(model.1) #Predicted values based on model.1
+plot(model.1)  #Plot model specification and diagonistics altogether
+plot(residuals(model.1))
+plot(ToothGrowth$dose,ToothGrowth$len,abline(model.1,lwd=2,col=4))
+segments(ToothGrowth$dose, ToothGrowth$len, ToothGrowth$dose, pred, col="red")

@@ -1,0 +1,7 @@
+require(MASS)
+require(rpart)
+data<-Pima.tr
+set.seed(20161125)
+model.8 <- rpart(type ~ ., data = data)
+plot(model.8,uniform=T)
+text(model.8)

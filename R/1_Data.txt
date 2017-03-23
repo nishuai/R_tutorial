@@ -1,0 +1,10 @@
+Idata()
+
+??ToothGrowth
+data(ToothGrowth)
+head(ToothGrowth)
+tail(Toothgrowth)
+dim(ToothGrowth)
+summary(ToothGrowth)
+str(ToothGrowth)
+colnames(ToothGrowth)

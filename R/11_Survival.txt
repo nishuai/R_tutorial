@@ -1,0 +1,12 @@
+require(survival)
+survobj<-with(myeloid,Surv(futime, death==1))
+
+plot(survfit(survobj~trt,data=myeloid),col=c(2,3),lty=c(5,6))
+legend(1800,0.15,c("treatment A","treatment B"),lty=c(5,6),col=c(2,3))
+
+cox.1<-coxph(Surv(futime, death) ~ trt, data=myeloid)
+cox.zph(cox.1)
+
+plot(survfit(cox.1,myeloid,lty=c(4,6)))
+legend(1800,0.25,"treatment A",cex=0.5)
+legend(1800,0.75,"treatment B",cex=0.5)

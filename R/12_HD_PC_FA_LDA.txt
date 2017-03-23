@@ -1,0 +1,26 @@
+library(devtools)
+install_github('datamicroarray', 'ramey')
+library(datamicroarray)
+data('chin', package = 'datamicroarray')
+table(chin$y)
+chin$x[1:10,1:5]
+
+prcm.1 <- princomp(Pima.tr[,-8], cor=TRUE)
+prcm.1
+biplot(prcm.1,cex=0.7,arrow.len=0.06,font=2)
+text(4,8.5,"Multi-dimensional Distance",pos=1,col=4,cex=0.7)
+plot(prcm.1)
+
+set.seed(011127)
+a<-sample(seq(1:4),100,replace=TRUE)
+b<-data.frame(matrix(a,nrow=10,ncol=10))
+require(psych)
+require(GPArotation)
+corMat<-cor(b)
+solution<-fa(r=corMat,nfactors=6,rotate="oblimin",fm ="miners")
+solution
+
+ld.1<-lda(type~.,data=Pima.tr)
+pred<-predict(ld.1,Pima.tr)
+plot(pred$x[,1], pch=16, ylab=c("LDA Axis 1"),col=c(2,3),cex=0.7)
+text(pred$x[,1], offset=0.5, pos=4, cex=0.4,  col=4)

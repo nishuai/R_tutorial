@@ -1,0 +1,15 @@
+Ilibrary(lme4)
+library(nlme)
+attach(Orthodont)
+
+par(mfrow=c(3,2))
+data<-subset(Orthodont,Orthodont$Sex=="Female")
+plot(data$distance~data$age,pch=17,col=11,xlab="Age of individual", ylab="Distance measured",main="Cross sectional line diagram (Females)")
+lines(data$distance~data$age, col =12, type="l",lwd=1,lty=1)
+
+data<-subset(Orthodont,Orthodont$Sex=="Male")
+plot(data$distance~data$age,pch=17,col=11,xlab="Age of individual", ylab="Distance measured",main="Cross sectional line diagram (Males)")
+lines(data$distance~data$age, col =12, type="l",lwd=1,lty=1)
+
+model.7<-lmer(distance~age+Sex+(1|Subject),data=Orthodont)
+summary(model.7)

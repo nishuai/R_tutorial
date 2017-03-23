@@ -1,0 +1,12 @@
+require(class)
+data<-Orthodont
+smp_size <- floor(0.5 * nrow(data))
+set.seed(123)
+train_prop<-sample(seq_len(nrow(data)), size = smp_size)
+train<-data[train_prop, ]
+test<-data[-train_prop, ]
+train1<-train[,-c(3,4)]
+test1<-test[,-c(3,4)]
+train1$sex<-with(train,ifelse(Sex=="Male",1,0))
+test1$sex<-with(test,ifelse(Sex=="Male",1,0))
+knn.1<-knn(train1[,-3],test1[-3],train1$sex,k=2)

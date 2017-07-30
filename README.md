@@ -6,3 +6,5 @@ The course covers topics like basic data structures, importing and exporting dat
 This repository contains slides and datasets for exercises, some of the datasets are grabbed from the online repository of the book 'Introduction to Statistical Learning', we highly recommend this book for a better understanding to the statistics.
 
 Datasets used in the exercises can be found in folder 'Data'.
+
+Please send you exercises to nishuai#at#yahoo{dot}com

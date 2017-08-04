@@ -1,0 +1,205 @@
+#######################
+#######graphics########
+#######################
+demo(graphics)
+
+plot(iris$Sepal.Length)
+plot(iris$Species)
+plot(iris$Species, iris$Sepal.Length)
+plot(iris$Sepal.Width, iris$Sepal.Length)
+
+par(mfcol=c(2,2), lty=3, col=rgb(1,0,0, alpha=0.5), bty='n', cex=0.3)
+plot(iris$Sepal.Length, type='l')
+plot(iris$Sepal.Length, type='l', lty=1)
+plot(iris$Sepal.Length, type='l', bty='o')
+plot(iris$Sepal.Length, type='l', ann=FALSE)
+
+library(pheatmap)
+genes <- matrix(rnorm(600), nrow=100)
+rownames(genes) <- paste0("Gene", 1:100)
+colnames(genes) <- paste0("Condition", 1:6)
+genes[1:2,]= genes[1:2,]+3
+genes[1:20, 1:3]= genes[1:20, 1:3]+3
+genes[80:90, 1:3]= genes[80:90, 1:3]-3
+pheatmap(genes, cellwidth = 20, fontsize = 7)
+pheatmap(genes, filename = 'Myheatmap.pdf')
+
+library(grDevices)
+Finer_color = colorRampPalette(brewer.pal(n = 7, name = "RdBu"))(100)
+Mymatrix=matrix(1:5000, nrow=10)
+pheatmap(Mymatrix, cellheight = 10, color=brewer.pal(n = 7, name='RdBu'),
+         cluster_rows = FALSE, cluster_cols = FALSE,
+         main = 'Heatmap with 7 individual colors')
+pheatmap(Mymatrix, color = Finer_color, cellheight = 10,
+         cluster_rows = FALSE, cluster_cols = FALSE,
+         main = 'Heatmap with 847 individual colors')
+
+#######################
+#########ggplot########
+#######################
+library(ggplot2)
+ggplot(data=diamonds, aes(x=carat, y=price)) +
+    geom_point(color='orange', size= 0.2) ## ggsave('Myggplot.pdf')
+## ggsave("Myggplot.png")
+
+##city miles per gallon and highway miles per gallon
+ggplot(data=mpg, aes(x=cty, hwy))
+p = ggplot(data=mpg, aes(x=cty, hwy))
+summary(p)
+p + geom_point()
+
+
+ggplot(mpg)+ geom_point(aes(x=cty, y=hwy))
+ggplot(mpg, aes(x=cty, y=hwy))
+
+# aes() is also used to set color and size by variables in dataset
+ggplot(data=mpg, aes(x=cty, hwy))+
+    geom_point(aes(color=cty))
+ggplot(data=mpg, aes(x=cty, hwy))+
+    geom_point(aes(color=factor(cyl), size=cyl))+
+    ggtitle('title of my first graph')
+
+# You can also map aesthetics to functions of variables
+ggplot(data=mpg, aes( x = cty^ 2, y = hwy / cyl))+
+    geom_point
+
+# There can be only one variable in aes(), with suitable geom method
+ggplot(mtcars, aes(mpg))
+ggplot(mtcars, aes(mpg))+geom_histogram(binwidth=5)
+ggplot(mtcars, aes(mpg))+geom_point()
+# geom lables will override color sceme from the main ggplot call
+ggplot(mtcars, aes(x=wt, y=mpg, color=cyl))+
+    geom_point(size=5, color='green')
+ggplot(mtcars, aes(x=wt, y=mpg, color=factor(cyl)))+
+    geom_point(size=5)
+
+# We can set another layer of statistical representation, variable names should always be inside aes()
+ggplot(mpg, aes(x=cty, y=hwy))+
+    geom_point(aes(color=factor(year), size=displ))+
+    stat_smooth()
+ggplot(mpg, aes(x=cty, y=hwy))+
+    geom_point(aes(color=factor(year), size=displ),
+               alpha=0.5, position= 'jitter')+
+    stat_smooth()+
+    scale_color_manual(values=c('gold','lightblue'))
+# Aesthetic mapping will not be shared between additional layers
+ggplot(mpg)+ geom_point(aes(x=cty, y=hwy))+stat_smooth()
+
+# Adjust the position of overlaping geom objects
+g= ggplot(diamonds, aes(cut))
+g+ geom_bar(aes(fill=color))
+g+ geom_bar(aes(fill=color), position='dodge')
+g+ geom_bar(aes(fill=color), position='jitter')
+# Scale controls the detail of the data to be prensented, like colors, lables, x and y axis limits and color schemes
+g= ggplot(mtcars, aes(mpg,disp))
+g+ geom_point() +
+    labs(title = "Relationship between displacement and miles per gallon",
+         y = "Engine displacement")
+g+ geom_point() +
+    ylim(0, 600)
+ggplot(mpg)+ geom_point(aes(x=cty, y=hwy))+stat_smooth()
+
+
+# Themes control the display of all non-data elements of the plot. One can use existing themes, or choose to tweak individual settings by using theme()
+g+ geom_point() +
+    theme_dark()
+g+ geom_point() +
+    theme_classic()
+Mytheme=theme(panel.grid.major = element_blank(),
+              panel.grid.minor = element_line(color="dodgerblue"),
+              panel.background = element_rect(fill='pink'),
+              axis.line = element_line(colour = "red"),
+              axis.text = element_text(angle = 90, hjust = 1))
+g+ geom_point() +
+    Mytheme
+
+
+# Bar chart
+# Number of diamonds in each clarity class:
+g <- ggplot(diamonds, aes(clarity))
+g + geom_bar()
+g + geom_bar(aes(fill=cut))
+g + geom_bar(aes(fill=color))+ coord_flip()
+# Box plot
+# Distribution of diamonds carat:
+g <- ggplot(diamonds, aes(x=clarity, y=carat))
+g + geom_boxplot()
+g + geom_boxplot(aes(fill=clarity))
+g + geom_boxplot(aes(fill=color))
+              
+# Deisity plot
+# Density plot for diamond price
+g=ggplot(data = diamonds, aes(x =price))
+g+geom_density()
+g+geom_density(aes(color=color))
+# Histgram
+# Histgram for diamond carat
+ggplot(diamonds, aes(price)) +
+    geom_histogram()
+ggplot(diamonds, aes(carat)) +
+    geom_histogram(binwidth = 0.01)
+ggplot(diamonds, aes(price)) +
+    geom_histogram(aes(fill=clarity))
+
+
+# Line chart
+scale_fill_manual(values=rep(brewer.pal(8, 'Pastel1')[c(1,2,5)], 5))
+set.seed(100)
+rainfall=data.frame(matrix(rnorm(48), 8, 6))
+rainfall=rainfall+5
+names(rainfall)=c('Jan','Feb','Mar','Apr','May','Jun')
+rainfall[1:4,]=rainfall[1:4,] + rep(seq(0,9,length.out = 8), each=6)
+rainfall$city=c('Beijing','Bangkok','Delhi',
+                'Moscow','Suzhou','Lima', 'Berlin','Madrid')
+rainfall=melt(rainfall)
+ggplot(rainfall, aes(variable, value, color=city))+
+    geom_line(aes(group=city), size=2 )+
+    geom_point(size=3)+
+    theme(panel.grid.minor=element_blank(),
+          panel.grid.major=element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_blank())+
+    scale_fill_manual(values=brewer.pal(8, 'set2'))
+
+# Exercises1
+ggplot(data=mtcars, aes(x=factor(cyl), y=mpg))+
+    geom_boxplot(aes(fill=factor(cyl)))
+
+# Exercises2
+
+ggplot(data=mtcars, aes(x=factor(cyl), y=mpg))+
+    geom_violin()
+###add jitter dots
+ggplot(data=mtcars, aes(x=factor(cyl), y=mpg))+
+    geom_violin()+geom_point(position = 'jitter')
+###jitter dots with different shape
+ggplot(data=mtcars, aes(x=factor(cyl), y=mpg))+
+    geom_violin()+geom_point(position = 'jitter',
+                             aes(shape = factor(am)))
+
+#Exercise3
+##randomly select 200 records from diamond dataset
+sample_diamonds=diamonds[sample(1:nrow(diamonds), 200),]
+ggplot(sample_diamonds, aes(carat, price))+
+    geom_point(aes(col=clarity))
+##add a smooth curce
+ggplot(data=sample_diamonds, aes(carat, price))+
+    geom_point(aes(col=clarity))+
+    stat_smooth()
+##add a linear regression line
+ggplot(data=sample_diamonds, aes(carat, price))+
+    geom_point(aes(col=clarity))+
+    stat_smooth(method = 'lm')
+###distrobution of diamond carat
+ggplot(data=sample_diamonds, aes(carat))+geom_density()
+
+###distrobution of diamond price with clarity
+ggplot(data=sample_diamonds, aes(price))+
+    geom_density(aes(color=clarity))
+
+###distrobution of diamond price with jitter
+ggplot(data=sample_diamonds, aes(x=clarity, y=price))+
+    geom_point(aes(color=clarity), position = 'jitter')
+###grater than 2000 doolars
+ggplot(data=sample_diamonds[sample_diamonds$price>=2000,], aes(x=clarity, y=price))+
+    geom_violin()

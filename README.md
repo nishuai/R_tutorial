@@ -8,7 +8,7 @@ Learn R in 20 days
  
 ## 💡 Introduction
 
-Welcome to the course 'R in 20 days', the course will take you through all the basics you need to know about R programming. 
+Welcome to the course `'Learn R in 20 days'`, the course will take you through all the basics you need to know about R programming. 
 
 The course covers topics like basic data structures, importing and exporting data, accessing packages, writing customized functions, visualizing your data and also some popular statistical methods and their applications in R. After the course, you will be able to comfortably program in R and freely conduct you own analysis.
 

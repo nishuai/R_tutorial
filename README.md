@@ -29,8 +29,6 @@ The course is is formed by 2 major functional parts, and multiple topics in each
  
 ## 💡 In this folder
 
-This repository contains slides and datasets for exercises, some of the datasets are grabbed from the online repository of the book 'Introduction to Statistical Learning', we highly recommend this book for a better understanding to statistics.
-
-Datasets used in the exercises can be found in `Data`.
+Datasets used in the exercises can be found in `Data`. Some of the datasets are grabbed from the online repository of the book 'Introduction to Statistical Learning', we highly recommend this book for a better understanding to statistics.
 
 R functions and example answers to some of the exercises used in the lecture can be found in 'R'.

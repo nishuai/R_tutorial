@@ -1,4 +1,4 @@
-# R in 20 days
+# Learn R in 20 days
 <p align = "center">
 <img alt="BND" width="128" src="https://raw.githubusercontent.com/b3log/baidu-netdisk-downloaderx/master/bnd2/react/public/logo.png">
 <br><br>

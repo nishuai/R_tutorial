@@ -16,8 +16,17 @@ The course covers topics like basic data structures, importing and exporting dat
 
 The course is is formed by 2 major functional parts, and multiple topics in each part. You may start the course from any topic you like to suit your needs.
 ####  1) The basic programming and graphics in R 
+ 1. [`r_intro.pdf`](https://github.com/nishuai/R_tutorial/blob/master/r_intro.pdf)
+ 2. [`vectors.pdf`](https://github.com/nishuai/R_tutorial/blob/master/vectors.pdf)
+ 3. [`matrix.pdf`](https://github.com/nishuai/R_tutorial/blob/master/matrix.pdf)
+ 4. [`dataIO.pdf`](https://github.com/nishuai/R_tutorial/blob/master/dataIO.pdf)
+ 5. [`control_flow.pdf`](https://github.com/nishuai/R_tutorial/blob/master/control_flow.pdf)
+ 6. [`lists_functions.pdf`](https://github.com/nishuai/R_tutorial/blob/master/lists_functions.pdf)
+ 7. [`graphics1.pdf`](https://github.com/nishuai/R_tutorial/blob/master/graphics1.pdf)
+ 8. [`graphics2.pdf`](https://github.com/nishuai/R_tutorial/blob/master/graphics2.pdf)
 ####  2) Statistical learning and popular applications in R
-
+ 1. [`Statistics.pdf`](https://github.com/nishuai/R_tutorial/blob/master/Statistics.pdf)
+ 
 ## 💡 In this folder
 This repository contains slides and datasets for exercises, some of the datasets are grabbed from the online repository of the book 'Introduction to Statistical Learning', we highly recommend this book for a better understanding to statistics.
 

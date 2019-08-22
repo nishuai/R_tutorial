@@ -28,6 +28,9 @@ The course is is formed by 2 major functional parts, and multiple topics in each
  1. [`Statistics.pdf`](https://github.com/nishuai/R_tutorial/blob/master/Statistics.pdf)
  
 ## 💡 In this folder
+
 This repository contains slides and datasets for exercises, some of the datasets are grabbed from the online repository of the book 'Introduction to Statistical Learning', we highly recommend this book for a better understanding to statistics.
 
-Datasets used in the exercises can be found in folder 'Data'.
+Datasets used in the exercises can be found in `Data`.
+
+R functions and example answers to some of the exercises used in the lecture can be found in 'R'.
